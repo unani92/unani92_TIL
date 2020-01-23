@@ -124,9 +124,54 @@ print(s_encoded_final)   # type : str
 ```
 > 타입 변환을 위해서는 .decode() 함수를 사용한다. 출력해 보면 `TGlmZSBpdHNlbGYgaXMgYSBxdW90YXRpb24u` 과 같이 문자열로 인코딩 되는 것을 알 수 있다. 이제 다시 원래대로 복구시켜보는 디코딩 과정을 수행해보자. 
 ```python
-d = s_encoded_final.encode()      # str -> byte
+d = s_encoded_final.encode()      # str -> bytes
 d_decoding = base64.b64decode(d)
-d_decoded = d_decoding.decode()
+d_decoded = d_decoding.decode()   # bytes -> str
 print(d_decoded)
 ```
 > 디코딩을 하기 위해 함수에 넣기 전에 str타입인 객체를 bytes 타입으로 변환시켜준다. 다음에는 b64decode 함수를 통해 디코딩을 수행하고, 마지막으로 byte에서 str로 형변환을 해주면 우리가 아는 그 영어가 출력된다. `Life itself is a quotation.` 
+
+
+### 1926. 간단한 369게임
+```python
+a = int(input()) 
+lst = []
+for i in range(1, 1+a) :
+    cnt = 0 
+    for num in str(i) : 
+        if num in '369' : 
+            cnt += 1
+    if cnt == 0 : 
+        lst.append(str(i))
+    else : 
+        lst.append('-'*cnt)
+
+print(' '.join(lst))
+```
+
+
+### 1940. 가랏! RC카! 
+```python
+T = int(input())
+for t in range(1, 1+T) : 
+    sec = int(input())
+    m_per_s = 0
+    distance = []
+    for s in range(1, 1+sec) : 
+        lst = list(map(int, input().split()))
+        if lst[0] == 1 : 
+            m_per_s += lst[1]
+            distance.append(m_per_s)
+        elif lst[0] == 0 : 
+            distance.append(m_per_s) 
+        elif lst[0] == 2 : 
+            if m_per_s - lst[1] > 0 : 
+                m_per_s -= lst[1]
+                distance.append(m_per_s)
+            else : 
+                m_per_s = 0
+                distance.append(m_per_s)
+    print('#{} {}'.format(t, sum(distance)))
+```
+
+    

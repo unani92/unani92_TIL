@@ -62,3 +62,41 @@ for t in range(1,T+1) :
             break
         k += 1
     print('#{} {}'.format(t, k*n))
+
+# 1926. 간단한 369게임
+a = int(input()) 
+lst = []
+for i in range(1, 1+a) :
+    cnt = 0 
+    for num in str(i) : 
+        if num in '369' : 
+            cnt += 1
+    if cnt == 0 : 
+        lst.append(str(i))
+    else : 
+        lst.append('-'*cnt)
+print(' '.join(lst))
+
+# 1940. 가랏! RC카!
+T = int(input())
+for t in range(1, 1+T) : 
+    sec = int(input())
+    m_per_s = 0
+    distance = []
+    for s in range(1, 1+sec) : 
+        lst = list(map(int, input().split()))
+        if lst[0] == 1 : 
+            m_per_s += lst[1]
+            distance.append(m_per_s)
+        elif lst[0] == 0 : 
+            distance.append(m_per_s) 
+        elif lst[0] == 2 : 
+            if m_per_s - lst[1] > 0 : 
+                m_per_s -= lst[1]
+                distance.append(m_per_s)
+            else : 
+                m_per_s = 0
+                distance.append(m_per_s)
+    print('#{} {}'.format(t, sum(distance)))
+
+    
