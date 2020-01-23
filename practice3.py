@@ -1,5 +1,3 @@
-# swea문제풀이현황 시트
-# https://docs.google.com/spreadsheets/d/1S8PBMuosbpb7HRkjpFLSH4CeNMJ7hUw_QwEjonls1u4/edit#gid=8284278
 # 1204. [S/W 문제해결 기본] 1일차 - 최빈수 구하기
 
 from collections import Counter
@@ -16,3 +14,51 @@ for i in range(1, a+1) :
             lst_fin.append(j)
     lst_fin_sort = sorted(lst_fin, key=lambda x: x[0], reverse=True)
     print('#{} {}'.format(b,lst_fin_sort[0][0]))
+
+# 1284 수도 요금 경쟁
+T = int(input())
+for t in range(1,T+1) : 
+    p,q,r,s,w = map(int, input().split())
+    price = 0
+    if w <= r : 
+        if (w*p <= q) : 
+            price = w*p
+        else : 
+            price = q
+    else : 
+        if (w*p < q+(w-r)*s) : 
+            price = w*p
+        else : 
+            price = q+(w-r)*s
+    print('#{} {}'.format(t, price))
+
+# 1285. 아름이의 돌 던지기
+T = int(input())
+for t in range(1, 1+T) : 
+    how_many = int(input())
+    lst = map(int, input().split())
+    how_close = []
+    for num in lst : 
+        how_close.append(abs(num))
+    most_close = min(how_close)    # 가장 짧은 거리
+    cnt = 0                        # 몇명이 해당되는지 카운팅
+    for nb in how_close : 
+        if nb == most_close : 
+            cnt += 1
+    print('#{} {} {}'.format(t, most_close, cnt))
+
+# 1288. 새로운 불면증 치료법
+T = int(input())
+for t in range(1,T+1) : 
+    num_dic = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0}
+    n = int(input())
+    k = 1
+    while k > 0 : 
+        n_baesu = str(k*n)
+        lst = list(n_baesu)
+        for key in lst : 
+            num_dic[key] += 1
+        if 0 not in num_dic.values() : 
+            break
+        k += 1
+    print('#{} {}'.format(t, k*n))
