@@ -174,4 +174,161 @@ for t in range(1, 1+T) :
     print('#{} {}'.format(t, sum(distance)))
 ```
 
-    
+
+### 1983. 조교의 성적 매기기
+```python
+T = int(input())
+for t in range(1, 1+T) : 
+    n,k = map(int, input().split())
+    student_lst = []
+     """
+     1. 총점을 산출한다.
+     2. 학생 번호와 총점을 포함하는 2차원 배열을 총점순으로 소팅한다. 
+     """
+    for i in range(1, n+1) :    
+        scores = list(map(int, input().split()))
+        pts = 0.35*scores[0] + 0.45*scores[1] + 0.20*scores[2]
+        student_lst.append([i, pts])
+    lst_sorted = sorted(student_lst, key=lambda x: x[1], reverse=True)
+    """
+    # 3. 구간별로 학점을 나누고 학점을 2차원 리스트에 넣어준다. 
+    """
+    for idx, lst in enumerate(lst_sorted, start=1) : 
+        if 0 < (idx/n)*10 <= 1  : 
+            lst_sorted[idx-1].append('A+')
+        elif 1 < (idx/n)*10 <= 2 :
+            lst_sorted[idx-1].append('A0')
+        elif 2 <= (idx/n)*10 <= 3 :
+            lst_sorted[idx-1].append('A-')
+        elif 3 <= (idx/n)*10 <= 4 :
+            lst_sorted[idx-1].append('B+')
+        elif 4 <= (idx/n)*10 <= 5 :
+            lst_sorted[idx-1].append('B0')
+        elif 5 <= (idx/n)*10 <= 6 :
+            lst_sorted[idx-1].append('B-')
+        elif 6 <= (idx/n)*10 <= 7 :
+            lst_sorted[idx-1].append('C+')
+        elif 7 <= (idx/n)*10 <= 8 :
+            lst_sorted[idx-1].append('C0')
+        elif 8 <= (idx/n)*10 <= 9 :
+            lst_sorted[idx-1].append('C-')
+        else :  
+            lst_sorted[idx-1].append('D0')
+    """
+    #4. [학생번호, 점수, 학점] 이 들어있는 2차원 자료에서 
+         k번째 학생을 인덱싱해 결과 출력 
+    """
+    for j in lst_sorted : 
+        if k in j : 
+            print('#{} {}'.format(t, j[2]))
+            break 
+```
+
+
+### 2007. 패턴 마디의 길이
+``` python
+T = int(input())
+for t in range(1, T+1) : 
+    strings = input()
+    for i in range(1,31) : 
+        if strings[0:i] == strings[i:i*2] : 
+            break
+
+    print('#{} {}'.format(t,i))
+```
+
+
+### 1983. 초심자의 회문검사
+```python
+def palindrome(a) :
+    a_lst = list(a)
+    ar_lst = list(reversed(a))
+    p = 0
+    for idx, value in enumerate(a_lst) : 
+        if value == ar_lst[idx] : 
+            p += 1
+    if p == len(a) : 
+        return 1
+    else : 
+        return 0
+
+T = int(input())
+for t in range(1, T+1) : 
+    word = input()
+    print('#{} {}'.format(t, palindrome(word)))
+```
+
+### 2005. 파스칼의 삼각형
+#### 재귀(Recursion)를 활용한 프로그래밍
+
+> 파스칼의 삼각형을 재귀함수를 이용해 풀어보았다. 
+
+![image](https://user-images.githubusercontent.com/53211781/73061013-8434c700-3edc-11ea-8d23-8eb1c6361dfa.png)
+
+> 예를 들어 네번째 줄에 두번째 숫자인 3이 나오려면 (3번째 줄의 첫번째) + (3번째 줄의 두번째)를 더하면 된다. 이를 임의의 함수로 표현하자면 `p(4,2) = p(3,1) + p(3,2)`라고 할 수 있다. 코드로 만들면 다음과 같다. 
+```python
+def p(a,b) : 
+    if b == 1 : 
+        return 1
+    elif a == b : 
+        return 1
+    else : 
+        return p(a-1, b-1) + p(a-1, b)
+
+# 출처 : https://codereview.stackovernet.com/ko/q/23832
+```
+> 파이썬이 알아서 재귀를 돌아준다는걸 몰랐는데 코드 작성하고 돌려보니까 신기방기하다. 다만 재귀를 무한정 돌수는 없기에 조건을 반드시 설정해 주어야 한다. 각 줄의 첫번째 수는 무조건 1이고, 각 층의 가장 마지막 숫자 역시 무조건 1이라고 설정해 주는 if 문이 그러하다. 만약 조건을 넣어주지 않으면 함수가 만들어지기는 하겠지만 처리할 수 없는 수가 매개변수에 입력되면 `RecursionError: maximum recursion depth exceeded in comparison` 와 같은 에러메시지가 출력된다. 
+
+```python
+def pascal(a,b) :
+    '''
+    a : 파스칼 삼각형의 층수(가장 위가 1층)
+    b : a 층의 자리수
+    ex) 4층 3번째 자리의 숫자 3은 <pascal(4,3) = 3>
+    '''     
+    if b == 1 : 
+        return 1
+    elif a == b : 
+        return 1
+    else : 
+        return p(a-1, b-1) + p(a-1, b)
+
+T = int(input())
+for t in range(1, 1+T) : 
+    a = int(input())
+    print('#{}'.format(t))
+    for i in range(1,a+1) : 
+        lst = []
+        for j in range(1,i+1) : 
+            lst.append(str(pascal(i,j)))
+        print(' '.join(lst))
+```
+
+
+### 2007. 패턴 마디의 길이
+```python
+T = int(input()) 
+for t in range(1, T+1) : 
+    n = int(input())
+    if n % 2 : 
+        print('#{} {}'.format(t, ((n//2)*-1)+n))
+    else : 
+        print('#{} {}'.format(t, ((n//2)*-1)))
+```
+
+
+### 1948. 날짜 계산기
+> 좋은 코드는 **돌아가는** 코드이다!!! 걍 라이브러리 쓰자
+```python
+from datetime import date
+T = int(input())
+for t in range(1, 1+T) : 
+    a,b,c,d = map(int, input().split())
+    d1 = date(2022,a,b)
+    d2 = date(2022,c,d)
+    day = str(d2-d1)[:3]
+    answer = int(day)+1
+    print('#{} {}'.format(t, answer)) 
+```
+
+
