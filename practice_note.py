@@ -268,7 +268,9 @@ for t in range(1, 1+T) :
 
 
 # 1970. 쉬운 거스름돈
-# 거스름돈 반환하는 함수부터 정의
+'''
+거스름돈 반환하는 함수부터 정의
+'''
 def change(m) : 
     lst = [0,0,0,0,0,0,0,0]
     if m >= 50000 : 
@@ -296,11 +298,42 @@ def change(m) :
         lst[7] = m // 10
         m -= 10 * lst[7]
     return lst
-
-# 함수 넣고 출력하면 끝
+'''
+함수 넣고 출력하면 끝
+'''
 T = int(input())
 for t in range(1, 1+T) : 
     m = int(input())
     s = [str(num) for num in change(m)]  # 조인 때릴라면 문자열이여야 하기 때문
     print('#{}'.format(t))
     print(' '.join(s))
+
+# 1959. 두 개의 숫자열
+T = int(input())
+for t in range(1, 1+T) :
+    N, M = map(int, input().split())
+    lst_N = list(map(int, input().split()))
+    lst_M = list(map(int, input().split()))
+    if N < M :
+        result = 0
+        for i in range(M-N+1) :
+            c = 0
+            num = 0
+            for j in range(i, i+N) :
+                num += lst_N[c] * lst_M[j]
+                c += 1
+            if result < num :
+                result = num
+                
+    else :           # N과 M이 같은 경우도 물론 있지만 문제에서 안물어보니까 생략
+        result = 0
+        for i in range(N-M+1) :
+            c = 0
+            num = 0
+            for j in range(i, i+M) :
+                num += lst_M[c] * lst_N[j]
+                c += 1
+            if result < num :
+                result = num
+
+    print('#{} {}'.format(t, result))
