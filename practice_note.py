@@ -1,5 +1,5 @@
-### 1204. [S/W 문제해결 기본] 1일차 - 최빈수 구하기
-```python
+# 1204. [S/W 문제해결 기본] 1일차 - 최빈수 구하기
+
 from collections import Counter
 a = int(input())
 
@@ -14,23 +14,8 @@ for i in range(1, a+1) :
             lst_fin.append(j)
     lst_fin_sort = sorted(lst_fin, key=lambda x: x[0], reverse=True)
     print('#{} {}'.format(b,lst_fin_sort[0][0]))
-```
-```python
-# 번외 : 리스트 원소들의 개수를 value로 갖는 딕셔너리 만들기 
 
-a = ['10', '8', '7', '2', '2', '4', '8', '8', '8', '9', '5', '5', '3', '2', '2', '5', '5']
-a_dic = {}
-for key in a : 
-    if key in a_dic.keys() : 
-        a_dic[key] += 1
-    else : 
-        a_dic[key] = 1
-print(a_dic)
-```
-
-
-### 1284. 수도 요금 경쟁
-```python
+# 1284 수도 요금 경쟁
 T = int(input())
 for t in range(1,T+1) : 
     p,q,r,s,w = map(int, input().split())
@@ -46,12 +31,8 @@ for t in range(1,T+1) :
         else : 
             price = q+(w-r)*s
     print('#{} {}'.format(t, price))
-```
 
-
-### 1285. 아름이의 돌 던지기
-막상 다 풀었는데 파이썬 지원 안해서 겁나빡침.... 
-```python
+# 1285. 아름이의 돌 던지기
 T = int(input())
 for t in range(1, 1+T) : 
     how_many = int(input())
@@ -65,11 +46,8 @@ for t in range(1, 1+T) :
         if nb == most_close : 
             cnt += 1
     print('#{} {} {}'.format(t, most_close, cnt))
-```
 
-
-### 1288. 새로운 불면증 치료법
-```python
+# 1288. 새로운 불면증 치료법
 T = int(input())
 for t in range(1,T+1) : 
     num_dic = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0}
@@ -84,56 +62,8 @@ for t in range(1,T+1) :
             break
         k += 1
     print('#{} {}'.format(t, k*n))
-```
 
-
-### 1928. Base64 Decoder
-```python
-import base64
-T = int(input())
-for t in range(1, T+1) : 
-    s = input()
-    s_decoding = s.encode()   # str -< byte
-    s_decoded = base64.b64decode(s_decoding)
-    s_decoded_fin = s_decoded.decode()
-    print('#{} {}'.format(t, s_decoded_fin))
-```
-##### 여기서 잠깐 !!! base64 모듈에 대해 아라보자
->참고로 모듈 설명은 깃허브에 소스코드가 공개되어 있고 파이썬 공식홈페이지에도 설명서가 있다. 
-https://github.com/python/cpython/blob/master/Lib/base64.py
-https://docs.python.org/ko/3.7/library/base64.html
-하지만 시간이 없는 사람들을 위해 간단히 몇가지 함수 보고 가자면
-```python
-# TGlmZSBpdHNlbGYgaXMgYSBxdW90YXRpb24u
-# Life itself is a quotation.
-
-import base64
-s = "Life itself is a quotation."
-s_encoding = s.encode()       # 디폴트 : "UTF-8"
-print(s_encoding)
-```
->출력물로 `b'Life itself is a quotation.'` 이 나온다. 이것의 타입은 str 같지만 type() 해보면 'bytes' 라는 요상한 타입으로 밝혀질 것이다. 
-```python
-s_encoded = base64.b64encode(s_encoding)
-print(s_encoded)
-```
-> 이제 이 bytes 타입의 객체를 함수에 넣어주면 `b'TGlmZSBpdHNlbGYgaXMgYSBxdW90YXRpb24u'` 과 같은 요상한 형태로 인코딩 된 결과물이 나온다. 물론 이 역시 타입은 str이 아닌 bytes 이다.
-```python
-s_encoded_final = s_encoded.decode()   # bytes -> str
-print(s_encoded_final)   # type : str
-```
-> 타입 변환을 위해서는 .decode() 함수를 사용한다. 출력해 보면 `TGlmZSBpdHNlbGYgaXMgYSBxdW90YXRpb24u` 과 같이 문자열로 인코딩 되는 것을 알 수 있다. 이제 다시 원래대로 복구시켜보는 디코딩 과정을 수행해보자. 
-```python
-d = s_encoded_final.encode()      # str -> bytes
-d_decoding = base64.b64decode(d)
-d_decoded = d_decoding.decode()   # bytes -> str
-print(d_decoded)
-```
-> 디코딩을 하기 위해 함수에 넣기 전에 str타입인 객체를 bytes 타입으로 변환시켜준다. 다음에는 b64decode 함수를 통해 디코딩을 수행하고, 마지막으로 byte에서 str로 형변환을 해주면 우리가 아는 그 영어가 출력된다. `Life itself is a quotation.` 
-
-
-### 1926. 간단한 369게임
-```python
+# 1926. 간단한 369게임
 a = int(input()) 
 lst = []
 for i in range(1, 1+a) :
@@ -145,13 +75,9 @@ for i in range(1, 1+a) :
         lst.append(str(i))
     else : 
         lst.append('-'*cnt)
-
 print(' '.join(lst))
-```
 
-
-### 1940. 가랏! RC카! 
-```python
+# 1940. 가랏! RC카!
 T = int(input())
 for t in range(1, 1+T) : 
     sec = int(input())
@@ -172,26 +98,23 @@ for t in range(1, 1+T) :
                 m_per_s = 0
                 distance.append(m_per_s)
     print('#{} {}'.format(t, sum(distance)))
-```
 
-
-### 1983. 조교의 성적 매기기
-```python
+# 1983. 조교의 성적매기기
 T = int(input())
 for t in range(1, 1+T) : 
     n,k = map(int, input().split())
     student_lst = []
-     """
-     1. 총점을 산출한다.
-     2. 학생 번호와 총점을 포함하는 2차원 배열을 총점순으로 소팅한다. 
-     """
+    '''
+     1. 총점을 산출하고
+     2. 성적순으로 소팅한 다음에
+    '''
     for i in range(1, n+1) :    
         scores = list(map(int, input().split()))
         pts = 0.35*scores[0] + 0.45*scores[1] + 0.20*scores[2]
         student_lst.append([i, pts])
     lst_sorted = sorted(student_lst, key=lambda x: x[1], reverse=True)
     """
-    # 3. 구간별로 학점을 나누고 학점을 2차원 리스트에 넣어준다. 
+    # 3. 구간별로 커딩한다.
     """
     for idx, lst in enumerate(lst_sorted, start=1) : 
         if 0 < (idx/n)*10 <= 1  : 
@@ -222,11 +145,8 @@ for t in range(1, 1+T) :
         if k in j : 
             print('#{} {}'.format(t, j[2]))
             break 
-```
-
-
-### 2007. 패턴 마디의 길이
-``` python
+             
+# 2007. 패턴마디의 길이
 T = int(input())
 for t in range(1, T+1) : 
     strings = input()
@@ -235,51 +155,18 @@ for t in range(1, T+1) :
             break
 
     print('#{} {}'.format(t,i))
-```
 
-
-### 1983. 초심자의 회문검사
-```python
-def palindrome(a) :
-    a_lst = list(a)
-    ar_lst = list(reversed(a))
-    p = 0
-    for idx, value in enumerate(a_lst) : 
-        if value == ar_lst[idx] : 
-            p += 1
-    if p == len(a) : 
-        return 1
-    else : 
-        return 0
-
+# 1989. 초심자의 회문 검사
 T = int(input())
 for t in range(1, T+1) : 
-    word = input()
-    print('#{} {}'.format(t, palindrome(word)))
-```
+    strings = input()
+    for i in range(1,31) : 
+        if strings[0:i] == strings[i:i*2] : 
+            break
 
-### 2005. 파스칼의 삼각형
-#### 재귀(Recursion)를 활용한 프로그래밍
+    print('#{} {}'.format(t,i))
 
-> 파스칼의 삼각형을 재귀함수를 이용해 풀어보았다. 
-
-![image](https://user-images.githubusercontent.com/53211781/73061013-8434c700-3edc-11ea-8d23-8eb1c6361dfa.png)
-
-> 예를 들어 네번째 줄에 두번째 숫자인 3이 나오려면 (3번째 줄의 첫번째) + (3번째 줄의 두번째)를 더하면 된다. 이를 임의의 함수로 표현하자면 `p(4,2) = p(3,1) + p(3,2)`라고 할 수 있다. 코드로 만들면 다음과 같다. 
-```python
-def p(a,b) : 
-    if b == 1 : 
-        return 1
-    elif a == b : 
-        return 1
-    else : 
-        return p(a-1, b-1) + p(a-1, b)
-
-# 출처 : https://codereview.stackovernet.com/ko/q/23832
-```
-> 파이썬이 알아서 재귀를 돌아준다는걸 몰랐는데 코드 작성하고 돌려보니까 신기방기하다. 다만 재귀를 무한정 돌수는 없기에 조건을 반드시 설정해 주어야 한다. 각 줄의 첫번째 수는 무조건 1이고, 각 층의 가장 마지막 숫자 역시 무조건 1이라고 설정해 주는 if 문이 그러하다. 만약 조건을 넣어주지 않으면 함수가 만들어지기는 하겠지만 처리할 수 없는 수가 매개변수에 입력되면 `RecursionError: maximum recursion depth exceeded in comparison` 와 같은 에러메시지가 출력된다. 
-
-```python
+# 2005. 파스칼의 삼각형
 def pascal(a,b) :
     '''
     a : 파스칼 삼각형의 층수(가장 위가 1층)
@@ -302,11 +189,8 @@ for t in range(1, 1+T) :
         for j in range(1,i+1) : 
             lst.append(str(pascal(i,j)))
         print(' '.join(lst))
-```
-
 
 ### 2007. 패턴 마디의 길이
-```python
 T = int(input()) 
 for t in range(1, T+1) : 
     n = int(input())
@@ -314,12 +198,8 @@ for t in range(1, T+1) :
         print('#{} {}'.format(t, ((n//2)*-1)+n))
     else : 
         print('#{} {}'.format(t, ((n//2)*-1)))
-```
 
-
-### 1948. 날짜 계산기
-> 좋은 코드는 **돌아가는** 코드이다!!! 걍 라이브러리 쓰자
-```python
+# 1948. 날짜 계산기
 from datetime import date
 T = int(input())
 for t in range(1, 1+T) : 
@@ -329,6 +209,98 @@ for t in range(1, 1+T) :
     day = str(d2-d1)[:3]
     answer = int(day)+1
     print('#{} {}'.format(t, answer)) 
-```
+
+# 2001. 파리퇴치
+T = int(input())
+for t in range(1, 1+T) : 
+    N, M = map(int, input().split())
+    lst = [list(map(int, input().split())) for _ in range(N)]
+    result = 0
+    for i in range(N-M+1) :     # 가로로 파리채가 지나갈 수 있는 경우의 수
+        for j in range(N-M+1) :    # 세로로 파리채가 지나갈 수 있는 경우의 수 
+            sum_f = 0
+            for r in range(i, i+M) : # 파리채의 가로
+                for c in range(j, j+M) : # 파리채의 세로
+                    sum_f += lst[r][c]   # 해당 칸의 파리를 모두 더해준다
+            if sum_f > result : 
+                result = sum_f
+                
+    print('#{} {}'.format(t, result))
+
+# 1976 시각덧셈
+def timecal(lst) : 
+    a, b = 0, 0
+    if lst[0] + lst[2] <= 12 : 
+        a = lst[0] + lst[2]
+    else : 
+        a = lst[0] + lst[2] - 12
+    if lst[1] + lst[3] < 60 : 
+        b = lst[1] + lst[3]
+    else : 
+        b = lst[1] + lst[3] - 60
+        a += 1
+    
+    return str(a), str(b)
+
+T = int(input())
+for t in range(1, 1+T) : 
+    lst = list(map(int, input().split()))
+    print('#{} {}'.format(t,' '.join(timecal(lst))))
+
+# 1946. 간단한 압축 풀기
+T = int(input())
+for t in range(1, 1+T) : 
+    a = int(input())
+    lst = []
+    for i in range(1, a+1) : 
+        alphabet, times = input().split()
+        for time in range(int(times)) : 
+            lst.append(alphabet)
+    cnt = 0
+    print('#%s'%t)
+    for s in lst : 
+        print(s, end = '')
+        cnt += 1
+        if cnt == 10 :      # 10개 넘어가면 개행 추가
+            print()
+            cnt = 0
+    print()          # 에러 방지용 빈 줄 하나 추가
 
 
+# 1970. 쉬운 거스름돈
+# 거스름돈 반환하는 함수부터 정의
+def change(m) : 
+    lst = [0,0,0,0,0,0,0,0]
+    if m >= 50000 : 
+        lst[0] = m // 50000
+        m -= 50000 * lst[0]
+    if m >= 10000 : 
+        lst[1] = m // 10000
+        m -= 10000 * lst[1]
+    if m >= 5000 : 
+        lst[2] = m // 5000
+        m -= 5000 * lst[2]
+    if m >= 1000 : 
+        lst[3] = m // 1000
+        m -= 1000 * lst[3]
+    if m>= 500 : 
+        lst[4] = m // 500
+        m -= 500 * lst[4]
+    if m>= 100 : 
+        lst[5] = m // 100
+        m -= 100 * lst[5]
+    if m>= 50 : 
+        lst[6] = m // 50
+        m -= 50 * lst[6]
+    if m>= 10 : 
+        lst[7] = m // 10
+        m -= 10 * lst[7]
+    return lst
+
+# 함수 넣고 출력하면 끝
+T = int(input())
+for t in range(1, 1+T) : 
+    m = int(input())
+    s = [str(num) for num in change(m)]  # 조인 때릴라면 문자열이여야 하기 때문
+    print('#{}'.format(t))
+    print(' '.join(s))
