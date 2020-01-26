@@ -104,3 +104,29 @@ for t in range(1, 1+T) :
                         cnt += 1
 
     print('#{} {}'.format(t, cnt))
+
+# 1961. 숫자 배열 회전
+
+'''
+ 0                90             180              270
+1 2 3          7 4 1           9 8 7            3 6 9
+4 5 6          8 5 2           6 5 4            2 5 8
+7 8 9          9 6 3           3 2 1            1 4 7
+'''
+
+matrix = [[1,2,3], [4,5,6], [7,8,9]]
+N = 3
+
+for i in range(N) :
+    for j in range(N) :          # 90 도
+        print(matrix[N-1-j][i], end='')
+    print(end=' ')  # 루프가 끝날 때 개행 하나 추가할 것
+
+    for k in range(N) :          # 180 도
+        print(matrix[N-1-i][N-1-k], end='')
+    print(end=' ')
+
+    for l in range(N) :          # 270 도
+        print(matrix[l][N-1-i], end='')
+    print(end=' ')
+    print()  # 루프가 끝날 때 개행 하나 추가할 것
