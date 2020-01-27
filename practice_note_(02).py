@@ -130,3 +130,32 @@ for i in range(N) :
         print(matrix[l][N-1-i], end='')
     print(end=' ')
     print()  # 루프가 끝날 때 개행 하나 추가할 것
+
+# 1859. 백만장자 프로젝트
+T = int(input())
+for t in range(1, 1+T) : 
+    N = int(input())
+    lst = list(map(int, input().split(' ')))
+    total = 0
+
+    while N > 0 : 
+        net = 0
+        m_lst = max(lst)
+        m_idx = lst.index(m_lst)
+        for j in range(m_idx) :    # 최대값 전날까지 전량 매수에 들인 비용
+            net += lst[j]
+        total += (m_lst * m_idx) - net   # 이윤 = 판매가 - 비용
+        lst = lst[m_idx + 1 : ]
+        '''
+        매도 타이밍과 벌어들이게 될 돈의 양을 알기 위해
+        최대값이 무엇이고 그것의 인덱스 번호만 알면 되기 때문에
+        코드도 간결해지고 메모리 부담도 적어진다.
+        
+        매도를 진행한 이후에는 그 전까지의 가격정보는 필요가 없기 때문에
+        슬라이싱을 통해 전부 날려준다. 
+        입력된 리스트는 루프가 진행될수록 자연스럽게 짧아지기 때문에
+        언젠가 루프는 끝이 나게 되고 최종 total 이윤이 나오게 된다.
+        '''
+        N = len(lst)
+        
+    print('#{0} {1}'.format(t, total))
