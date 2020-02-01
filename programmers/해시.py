@@ -51,3 +51,21 @@ def solution2(phone_book):
 
     if result == 0 :
         return True
+
+# 위장 
+from collections import Counter
+from functools import reduce
+
+def multiply(lst) :
+    return reduce(lambda x,y : x*y, lst)
+
+def solution(clothes) :
+    temp = []
+    for i in clothes :
+        temp.append(i[1])
+
+    clothes_dic = dict(Counter(temp))
+    clothes_val = list(clothes_dic.values())
+    clothes_val = list(map(lambda x : x+1, clothes_val))
+    ans = multiply(clothes_val)
+    return ans-1
