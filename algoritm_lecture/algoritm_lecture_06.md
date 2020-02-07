@@ -55,9 +55,9 @@ T = int(input())
 for t in range(1, 1+T) :
     N = int(input())
     numbers = list(map(int, input().split()))
-    result = -1
 
 	# 값을 그때그때 최신화하는 방법이 리스트 만들어서 넣는것보다 빠르다!!!
+    result = -1    # 1 같은 숫자로 잘못 설정했다가 최대값이 1 나오면 망하는거다....
     for i in range(N) :
         for j in range(i+1, N) :
             num = numbers[i] * numbers[j]
