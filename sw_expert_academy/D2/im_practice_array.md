@@ -176,6 +176,60 @@ for t in range(1, 1+T) :
     r = max(result)-min(result)
     print(f'#{t} {r}')
 ```
+### 8706. 당근수확 2 
+```python
+import sys
+sys.stdin = open('input.txt')
+
+T = int(input())
+for t in range(1, 1 + T):
+
+    # N: 농장의 길이, M : 카트 최대수용량
+    N, M = map(int, input().split())
+    farm = [0] + list(map(int, input().split()))
+
+    cart = 0  # 카트의 위치
+    cnt =  0 # 카트 움직인 거리
+
+    while farm[0] < sum(farm):
+        stack = M
+        cart += 1
+        cnt += 1
+        if farm[cart] > M:
+            farm[cart] -= M
+            cnt += cart
+            cart = 0
+            farm[0] += M
+
+        else:
+            while stack != 0 :
+                if stack >= farm[cart] :
+                    stack -= farm[cart]
+                    farm[cart] = 0
+                    if stack == 0:
+                        cnt += cart
+                        cart = 0
+                        farm[0] += M
+                        break
+
+                    cart += 1
+                    if cart > N :
+                        cnt += cart-1
+                        cart = 0
+                        farm[0] += M-stack
+                        stack = 0
+                        break
+
+                    cnt += 1
+                else :
+                    farm[cart] -= stack
+                    stack = 0
+                    cnt += cart
+                    cart = 0
+                    farm[0] += M
+
+    print(f'#{t} {cnt}')
+```
 
 
 
