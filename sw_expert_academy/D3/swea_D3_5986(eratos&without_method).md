@@ -21,21 +21,26 @@ def prime_all(num) :
 
 ##### 에라토스테네스의 체
 
-> 원리는 간단하다. 수를 나열하는 것 까지는 같지만 **해당 수가 특정 수의 배수이면 지워나가는 방법을 반복하고 남는 수들은 전부 소수다** 라는 원리이다. 1에서  num까지의 수를 bool 형태로 나열하고 특정 수의 배수임이 밝혀지면 지워주면 된다(해당 코드에서는 `True`를 `False`로 바꾸는 프로세스로 구현).
+> 원리는 간단하다. 수를 나열하는 것 까지는 같지만 **해당 수가 소수의 배수이면 지워나가는 방법을 반복하고 남는 수들은 전부 소수다** 라는 원리이다. 1에서  num까지의 수를 bool 형태로 나열하고 특정 수의 배수임이 밝혀지면 지워주면 된다(해당 코드에서는 `True`를 `False`로 바꾸는 프로세스로 구현).
 
 ```python
-def prime_all(num):
+def eratos(num) :
+	'''
+	컴퓨터의 시작은 0이라는 것을 감안해 1개 더 더해준다. 
+	만약 'num보다 작은' 이라는 단서가 붙으면 1 안더해도 된다. 
+	'''
+    result = [True] * (num+1)
+    m = int(num**0.5)
+	# num의 최대 약수가 sqrt(num) 이하이므로 i=sqrt(num)까지 검사
+    for i in range(2, m+1) :
+        if result[i] == True :
+            
+            # i가 2이면 2의 배수는 전부 False로 날려준다. 
+            for j in range(i+i, num+1, i) :
+                result[j] = False
 
-    # 0과 1은 애초에 소수가 아니기 때문에 False로 미리 값을 할당한다.
-    check_list = [True] * (num + 1)
-    check_list[0] = False
-    check_list[1] = False
-
-    for i in range(2, num):
-        for j in range(2, num):
-            if i * j <= num:
-                check_list[i * j] = False
-    return [i for i in range(len(check_list)) if check_list[i] == True]
+    return [idx for idx in range(2, num+1) if result[idx] == True]
+	
 ```
 
 ##### 이를 통한 구체적 구현
@@ -45,7 +50,7 @@ def prime_all(num):
 T = int(input())
 for t in range(1, 1+T) :
     num = int(input())
-    p_all = prime_all(num)
+    p_all = eratos(num)
 
     cnt = 0
     for i in range(len(p_all)) :
