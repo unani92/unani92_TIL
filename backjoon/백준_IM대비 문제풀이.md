@@ -103,3 +103,149 @@ for a in dice_lst[0] :
         max_s = s
 
 print(max_s)
+```
+
+### 2559. 수열
+
+> for문 스코프 조심.... 끝까지 계산이 이뤄지는지 반드시 체크
+
+```python
+N, D = map(int, input().split())
+
+temperature = list(map(int, input().split()))
+
+result = sum(temperature[0:D])
+cache = sum(temperature[0:D])
+for i in range(1,N-D+1) :
+    cache = cache - temperature[i-1] + temperature[i+D-1]
+    if cache >= result :
+        result = cache
+
+print(result)
+```
+
+### 2578. 빙고
+```python
+def isbingo_hor(lst) :
+    cnt = 0
+    for i in lst :
+        if i == [0,0,0,0,0] :
+            cnt += 1
+
+    return cnt
+
+def isbingo_ver(lst) :
+    cnt = 0
+    for i in list(zip(*lst)) :
+        if i == (0,0,0,0,0) :
+            cnt += 1
+
+    return cnt
+
+def isbingo_diag(lst) :
+    cnt = 0
+    temp = 0
+    for i in range(5) :
+        if lst[i][i] == 0 :
+            temp += 1
+    if temp == 5 :
+        cnt += 1
+
+    temp = 0
+    for i in range(5) :
+        if lst[i][4-i] == 0 :
+            temp += 1
+    if temp == 5 :
+        cnt += 1
+
+    return cnt
+
+# 알고리즘 구현
+board = [list(map(int, input().split())) for _ in range(5)]
+call = [list(map(int, input().split())) for _ in range(5)]
+call = [j for i in call for j in i]
+
+cnt = 0
+for c in call :
+    i = 0
+    j = 0
+    while i < 5 and j < 5 :
+        if board[i][j] != c :
+            j += 1
+        else :
+            board[i][j] = 0
+            cnt += 1
+            break
+
+        if j == 5 :
+            j = 0
+            i += 1
+
+    if isbingo_hor(board) + isbingo_diag(board) + isbingo_ver(board) >= 3 :
+        break
+
+print(cnt)
+```
+### 2477. 참외밭
+> 반례 찾았다. ~~씨발~~ 빼야될 부분이 뒤에 있는 경우만 생각하고 바로 앞에 붙은 부분을 생각 못해서 1시간 걸림
+
+```python
+# import sys
+# sys.stdin= open('input1.txt')
+
+melon = int(input())
+farm = [list(map(int,input().split())) for _ in range(6)]
+ver = sorted([b for a,b in farm if a == 3 or a == 4])
+hor = sorted([b for a,b in farm if a == 1 or a == 2])
+
+subset = 0
+for i in range(len(farm)-1) :
+    if i == 0 :
+        if farm[i][0] == 3 :
+            if farm[-1][0] == 1 :
+                subset = farm[-1][1] * farm[i][1]
+                break
+            if farm[i+1][0] == 2 :
+                subset = farm[i][1] * farm[i + 1][1]
+                break
+
+        if farm[i][0] == 1 :
+            if farm[-1][0] == 4 :
+                subset = farm[-1][1] * farm[i][1]
+                break
+            if farm[i+1][0] == 3 :
+                subset = farm[i][1] * farm[i+1][1]
+                break
+
+        if farm[i][0] == 4 :
+            if farm[-1][0] == 2 :
+                subset = farm[-1][1] * farm[i][1]
+                break
+            if farm[i+1][0] == 1 :
+                subset = farm[i][1] * farm[i+1][1]
+                break
+
+        if farm[i][0] == 2 :
+            if farm[-1][0] == 3 :
+                subset = farm[-1][1] * farm[i][1]
+                break
+            if farm[i+1][0] == 4 :
+                subset = farm[i][1] * farm[i+1][1]
+                break
+
+    else :
+        if farm[i][0] == 1 and farm[i+1][0] == 3 :
+            subset = farm[i][1] * farm[i+1][1]
+            break
+        if farm[i][0] == 4 and farm[i + 1][0] == 1:
+            subset = farm[i][1] * farm[i+1][1]
+            break
+        if farm[i][0] == 2 and farm[i+1][0] == 4 :
+            subset = farm[i][1] * farm[i+1][1]
+            break
+        if farm[i][0] == 3 and farm[i+1][0] == 2 :
+            subset = farm[i][1] * farm[i+1][1]
+            break
+
+all = (ver[-1] * hor[-1]) - subset
+print(all * melon)
