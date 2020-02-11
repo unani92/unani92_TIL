@@ -249,3 +249,91 @@ for i in range(len(farm)-1) :
 
 all = (ver[-1] * hor[-1]) - subset
 print(all * melon)
+```
+
+
+
+### 10163. 색종이
+
+```python
+N = int(input())
+lst = [list(map(int, input().split())) for _ in range(N)]
+for i in range(N) :
+    lst[i].append(i+1)
+
+
+matrix = [[0]*101 for _ in range(101)]
+for a,b,c,d,e in lst :
+    for i in range(b, b+d) :
+        for j in range(a,a+c) :
+            matrix[i][j] = e
+
+result = [0] * len(lst)
+for idx, val in enumerate(lst) :
+    for i in range(101) :
+        for j in range(101) :
+            if matrix[i][j] == val[-1] :
+                result[idx] += 1
+
+for i in result :
+    print(i, end=' ')
+```
+
+
+
+### 13330. 방배정
+
+```python
+from collections import Counter
+
+N, limit = map(int, input().split())
+
+all = [list(map(int, input().split())) for _ in range(N)]
+
+fir_grade = dict(Counter([lst[0] for lst in all if lst[1] == 1]))
+sec_grade = dict(Counter([lst[0] for lst in all if lst[1] == 2]))
+thr_grade = dict(Counter([lst[0] for lst in all if lst[1] == 3]))
+for_grade = dict(Counter([lst[0] for lst in all if lst[1] == 4]))
+fiv_grade = dict(Counter([lst[0] for lst in all if lst[1] == 5]))
+six_grade = dict(Counter([lst[0] for lst in all if lst[1] == 6]))
+
+room_cnt = 0
+for val in fir_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+for val in sec_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+for val in thr_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+for val in for_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+for val in fiv_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+for val in six_grade.values() :
+    if val % limit == 0 :
+        room_cnt += val // limit
+    else :
+        room_cnt += (val // limit) + 1
+
+print(room_cnt)
+```
+
