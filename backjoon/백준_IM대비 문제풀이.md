@@ -337,3 +337,113 @@ for val in six_grade.values() :
 print(room_cnt)
 ```
 
+
+
+### 14696. 딱지놀이
+
+```python
+N = int(input())
+for t in range(N) :
+    A = list(map(int, input().split()))[1:]
+    B = list(map(int, input().split()))[1:]
+
+    winner = ''
+    while A and B :
+        if max(A) > max(B) :
+            winner = 'A'
+            break
+        if max(A) < max(B) :
+            winner = 'B'
+            break
+
+        if max(A) == max(B) :
+            A.remove(max(A))
+            B.remove(max(B))
+
+    if A != [] and B == [] :
+        winner = 'A'
+    if A == [] and B != [] :
+        winner = 'B'
+    if A == [] and B == [] :
+        winner = 'D'
+
+    print(winner)
+```
+
+
+
+### 2564. 경비원
+
+```python
+ga, se = map(int, input().split())
+N = int(input())
+store = [list(map(int, input().split())) for _ in range(N)]
+guard = list(map(int, input().split()))
+
+result = 0
+# 1북 2남 3서 4동
+for a,b in store :
+    if guard[0] == 1 :
+        if a == 1 : # 북
+            result += abs(b - guard[1])
+        if a == 2 : # 남
+            clockwise = ga - guard[1] + se + ga - b
+            rev = guard[1] + se + b
+            if clockwise <= rev:
+                result += clockwise
+            else:
+                result += rev
+        if a == 3 : # 서
+            result += guard[1] + b
+        if a == 4 : # 동
+            result += ga-guard[1] + b
+
+    elif guard[0] == 2:
+        if a == 1 :  # 북
+            clockwise = guard[1] + se + b
+            rev = ga-guard[1] + se + (ga-b)
+            if clockwise <= rev:
+                result += clockwise
+            else:
+                result += rev
+        if a == 2 :  # 남
+            result += abs(b - guard[1])
+        if a == 3:   # 서
+            result += guard[1] + (se-b)
+        if a == 4 :  # 동
+            result += (ga-guard[1]) + (se-b)
+
+    elif guard[0] == 3:
+        if a == 1 : # 북
+            result += guard[1] + b
+        if a == 2 : # 남
+            result += se-guard[1] + b
+        if a == 3 : # 서
+            result += abs(b - guard[1])
+        if a == 4 : # 동
+            clockwise = guard[1] + ga + b
+            rev = se-guard[1] + ga + (se-b)
+            if clockwise <= rev:
+                result += clockwise
+            else:
+                result += rev
+
+    else :  # 동
+        if a == 1 : # 북
+            result += guard[1] + ga-b
+        if a == 2 : # 남
+            result += se-guard[1] + ga-b
+        if a == 3 : # 서
+            clockwise = se-guard[1] + ga + se-b
+            rev = guard[1] + ga + b
+            if clockwise <= rev:
+                result += clockwise
+            else:
+                result += rev
+
+        if a == 4 : # 동
+            result += abs(b - guard[1])
+
+print(result)
+```
+
