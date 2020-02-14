@@ -21,8 +21,9 @@ def vps(lst) :
                 else :
                     return 0
 
-    if len(stack) == 0 : return 1
-    else : return 0
+    else : 
+        if len(stack) == 0 : return 1
+        else : return 0
 
 T = int(input())
 for t in range(1, 1+T) :
