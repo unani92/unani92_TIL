@@ -1,20 +1,27 @@
-from collections import deque
+def DFS(v) :
+    visited[v] = 1
 
-def solution(priorities, location):
-    priorities = deque(priorities)
-    answer = 0
-    goal = priorities[location]
-    stack = []
-    while priorities :
-        stack.append(priorities.popleft())
-        for i in range(len(priorities)) :
-            if stack[-1] < priorities[i] :
-                priorities.append(stack.pop())
-                break
-        else :
-            answer += 1
+    print(v, end =' ')
+
+    for w in G[v] :
+        if not visited[w] :
+            DFS(w)
 
 
 
+import sys
+sys.stdin = open('input.txt')
 
-    return answer
+# 그래프를 만들어주는 기본 틀
+
+V, E = map(int, input().split())
+
+G = [[] for _ in range(V + 1)]
+visited = [0 for _ in range(V + 1)]
+
+for i in range(E):
+    u, v = map(int, input().split())
+    G[u].append(v)
+    G[v].append(u)
+
+print(DFS(1))
