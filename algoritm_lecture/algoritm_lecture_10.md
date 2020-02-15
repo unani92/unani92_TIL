@@ -47,8 +47,8 @@ for _ in range(E) :
     # mat_dic[t].append(f)
 
     # 3. 2차 리스트
-    # mat_arr[f].append(t)
-    # mat_arr[t].append(f)
+    mat_arr[f].append(t)
+    mat_arr[t].append(f)
 
     ## 엣지 리스트
     F.append([f,t])
