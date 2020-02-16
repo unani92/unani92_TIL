@@ -71,40 +71,68 @@ def solution(prices) :
 ```
 
 ```python
-def solution(prices) : 
+def solution(prices) :
     answer = []
-    for i in range(len(prices)-1) : 
-        cnt = 0
+    for i in range(len(prices)-1) :
         for j in range(i+1, len(prices)) :
-            cnt += 1
-            if prices[i] > prices[j] : 
+            if prices[i] > prices[j] :
+                answer.append(j-i)
                 break
-                
-        answer.append(cnt)        
-    
+
+            else :
+                if j == len(prices)-1 :
+                    answer.append(j-i)
+                    break~~~~
+
     return answer + [0]
 ```
 
 ### 쇠막대기 (슬랙 참조)
 
 ```python
-def solution(arrangement) :
-    answer = 0      # 짤린 막대기의 개수
-    cnt = 0         # 막대기의 개수를 스택으로 쌓는다.
+def solution(arrangement):
+    answer = 0
+    cnt = 0      # 막대기의 개수를 스택으로 표현
     for i in range(len(arrangement)) :
         if arrangement[i] == '(' :
             if arrangement[i+1] == ')' :
-                answer += cnt     # 레이저 발사 -> 짜른 막대기 더해주기
+                answer += cnt
             else :
-                cnt += 1     # 막대기 개수 하나씩 늘어남
+                cnt += 1
 
         else :
-            if arrangement[i-1] == '(' :
-                continue
-
-            else :    
-                cnt -= 1    # 막대기 끝부분이기 때문에 막대기 하나 제거
-                answer += 1     # 절단부 하나 더 추가해주기
+            if arrangement[i-1] == ')' :
+                cnt -= 1
+                answer += 1
 
     return answer
+```
+
+
+### 다리를 지나는 트럭
+```python
+from collections import deque
+
+def solution(bridge_length, weight, truck_weights):
+    answer = 0
+    truck_weights = deque(truck_weights)
+    bridge = deque([0] * bridge_length)
+
+    while len(truck_weights) != 0 :
+
+        if weight - sum(bridge) >= truck_weights[0] :
+            bridge.popleft()
+            bridge.append(truck_weights.popleft())
+            answer += 1
+        else :
+            bridge.popleft()
+            bridge.append(0)
+
+            if weight - sum(bridge) >= truck_weights[0] :
+                bridge[-1] = truck_weights.popleft()
+
+            answer += 1
+
+
+    return answer + len(bridge)
 ```

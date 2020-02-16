@@ -53,9 +53,6 @@ def DFS(v) :
         if not visited[w] :
             DFS(w)
 
-import sys
-sys.stdin = open('input.txt')
-
 # 그래프를 만들어주는 기본 틀
 
 V, E = map(int, input().split())
