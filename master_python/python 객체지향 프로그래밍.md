@@ -211,3 +211,110 @@ class Stack :
         self.lst.append(e)
 ```
 
+
+
+### 테스트클래스
+
+```python
+class TestClass:
+    
+    class_variable = '클래스 변수'
+    ...
+
+TestClass.class_variable                       # '클래스 변수'
+TestClass.class_variable = 'class variable'    # 클래스 변수 -> class variable
+TestClass.class_variable                       # 'class variable'
+
+tc = TestClass()
+tc.class_variable  
+```
+
+
+
+### 클래스 메서드
+* 클래스가 사용할 메서드(인스턴스들이 공유할 수도 있는 매서드)
+* 정의 위에 `@classmethod` 데코레이터를 사용한다.
+* **첫 번째 인자로 클래스(`cls`) 를 받도록 정의합니다. 이 때, 자동으로 클래스 객체가 `cls` 가 된다.**
+
+```python
+# 기본적으로 클래스가 사용하는 매서드이지만 인스턴스도 사용할 수 있다. 
+
+class Car : 
+    def __init__(self, name) : 
+        self.name = name
+        
+    def drive(self) : 
+        print('brrrrrr')
+        
+sonata = Car('sonata')
+sonata.drive()
+sonata.park()       # 인스턴스에서 접근
+Car.park()          # 정석적인 클래스의 접근
+```
+
+```
+>>> brrrrrr
+>>> stop!!
+>>> stop!!
+```
+
+```
+# 인스턴스만 사용할 수 있기 때문에 에러 발생
+
+Car.drive()
+
+>>>  TypeError: drive() missing 1 required positional argument: 'self'
+```
+
+
+
+### 정리 1. 
+
+- 인스턴스는, 3가지 메서드 모두에 접근할 수 있다.
+- 하지만 인스턴스에서 클래스 메서드와 스태틱 메서드는 호출하지 않아야 한다. **(가능하다 != 사용한다)**
+- 인스턴스가 할 행동은 모두 인스턴스 메서드로 한정 지어서 설계한다.
+
+### 정리 2 - 클래스와 메서드
+- 클래스는, 3가지 메서드 모두에 접근할 수 있다.
+- 하지만 클래스에서 인스턴스 메서드는 호출하지 않다. (가능하다 != 사용한다)
+- 클래스가 할 행동은 다음 원칙에 따라 설계한다.
+    - 클래스 자체(`cls`)와 그 **속성에 접근할 필요가 있다면** 클래스 메서드로 정의한다.
+    - 클래스와 클래스 속성에 접근할 필요가 없다면 스태틱 메서드로 정의한다.  
+
+
+
+```python
+class Calculator : 
+    
+    @staticmethod
+    def add(a, b) :
+        return a+b
+    
+    @staticmethod
+    def sub(a, b) :
+        return a-b
+    
+    @staticmethod
+    def mul(a, b) : 
+        return a*b
+    
+    @staticmethod 
+    def div(a, b) :
+        return a / b
+```
+
+```
+# 클래스에서 접근
+Calculator.add(1,2)
+>>> 3
+
+# 인스턴스 만들어서 접근
+c = Calculator()
+c.add(1,2)
+>>> 3
+```
+
+> 뭐 사실 별 차이가 없다. 파이썬의 언어 특성 상 스태틱 매소드를 구분해서 쓸 필요가 적다. 
+>
+> 다만 self를 기본인자로 받으면 인스턴스 매소드 / cls로 받으면 클래스 매소드 / 없으면 스태틱이다. 
+
