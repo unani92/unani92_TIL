@@ -246,10 +246,14 @@ class Car :
     def drive(self) : 
         print('brrrrrr')
         
+    @classmethod
+    def park(cls) : 
+        print('stop!!')
+        
 sonata = Car('sonata')
 sonata.drive()
-sonata.park()       # 인스턴스에서 접근
-Car.park()          # 정석적인 클래스의 접근
+sonata.park()       # 클래스 매서드를 인스턴스에서 사용해도 뭐 되긴 된다......
+Car.park()          # 정석적인 클래스 매서드의 활용
 ```
 
 ```
