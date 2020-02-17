@@ -63,6 +63,7 @@ print(fib(10))
 
 > '점으로 구분된 모듈 이름' 을 써서 파이썬의 모듈 이름 공간을 구조화하는 방법입니다. 예를 들어, 모듈 이름 `myPackage.math`는 `myPackage`라는 이름의 패키지에 있는 `math`라는 이름의 서브 모듈을 가리킵니다.
 
+<<<<<<< HEAD
 - jupyter notebook 파일트리화면에서 New > Folder
 - 다음과 같은 폴더구조 생성
 
