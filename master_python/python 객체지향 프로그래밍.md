@@ -322,3 +322,38 @@ c.add(1,2)
 >
 > 다만 self를 기본인자로 받으면 인스턴스 매소드 / cls로 받으면 클래스 매소드 / 없으면 스태틱이다. 
 
+### 매서드의 종류별 활용
+
+```python
+class Calculator : 
+    cnt = 0             # 클래스 변수
+    def info(self) : 
+        print('이것은 계산기입니다. ')
+
+    @staticmethod
+    def add(a,b) : 
+        Calculator.cnt += 1
+        print(f'{a} + {b}는 {a+b} 입니다.')
+
+    @classmethod
+    def history(cls) : 
+        print(f'총 {cls.cnt}번 계산했습니다.')
+```
+
+- info() 는 **인스턴스 매서드**이다. 따라서 클래스 객체를 만들어서 그 안에서 작동시켜야 한다. 
+- add()는 **스태틱 매서드**이다. 클래스 객체에서 쓰던 클래스 자체에서 작동시키건 차이가 없다. 
+- history는 **클래스 매서드**이다. 클래스 변수를 활용해 특정 동작을 수행하게 유도할 때 사용하면 유용하다. 
+```
+c = Calculator()
+
+c.info()
+Calculator.add(1,2)
+c.add(2,2)
+Calculator().history()
+```
+```
+ 이것은 계산기입니다.
+1 + 2는 3 입니다.
+2 + 2는 4 입니다.
+총 2번 계산했습니다.
+```
