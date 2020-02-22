@@ -107,3 +107,95 @@ for t in range(1, 1+T) :
     winner = tournament(card,0,num)
     print(f'#{t} {winner+1}')
 ```
+
+### 수열 찾기 비공개문제(미로 유형과 유사)
+```python
+def findstart() :
+    global M
+    for i in range(M) :
+        for j in range(M) :
+            if board[i][j] :
+                return i,j
+
+T = int(input())
+for t in range(1, 1+T) :
+
+    goal = list(map(int, input().split()))
+    N = goal.pop(0)
+    M = int(input())
+    board = [list(map(int, input().split())) for _ in range(M)]
+    visited = [[False]*M for _ in range(M)]
+    stack = [findstart()]
+
+    x, y = stack[0][0], stack[0][1]
+    result = [board[x][y]]
+    visited[x][y] = True
+    goal.remove(board[x][y])
+
+    while True :
+        if not goal :
+            break
+
+        for dx, dy in (1,0),(-1,0),(0,-1),(0,1) :
+            test_x, test_y = x+dx, y+dy
+            if 0 <= test_x < M and 0 <= test_y < M :
+                if not visited[test_x][test_y] and board[test_x][test_y] :
+                    x, y = test_x, test_y
+                    stack.append((x,y))
+                    visited[x][y] = True
+
+                    if board[x][y] in goal :
+                        goal.remove(board[x][y])
+
+        else :
+            if not stack : break
+            else :
+                n = stack.pop()
+                x,y = n[0],n[1]
+
+    if not goal :
+        print(f'#{t} {1}')
+    else :
+        print(f'#{t} {0}')
+```
+
+### 후위표기법 연산 계산기
+```python
+for t in range(1, 11) :
+    N = int(input())
+    str_nums = list(input())
+    operators = {'*':1, '/':1, '+':2 ,'-':2,'(':3}
+    stack = []
+    backwards = []
+    
+    # 후위표기법 변환과정
+    for s in str_nums :
+        if s is '(' :
+            stack.append(s)
+        elif s is ')' :
+            while stack[-1] != '(' :
+                backwards.append(stack.pop())
+            stack.pop()
+        elif s in operators.keys() :
+            while operators[s] >= operators[stack[-1]] :
+                backwards.append(stack.pop())
+            stack.append(s)
+        else :
+            backwards.append(int(s))
+    
+    # 후위식 연산과정
+    for i in backwards:
+        if i not in operators.keys():
+            stack.append(int(i))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if i is '+': stack.append(a + b)
+            elif i is '-': stack.append(a - b)
+            elif i is '*': stack.append(int(a * b))
+            elif i is '/': stack.append(int(a / b))
+    
+    # 후위식이 올바른 형식이라면 스택에는 최종 결과물로 "반드시" 1개의 숫자만 남는다.
+    result = stack.pop()
+    print(f'#{t} {result}')
+```
