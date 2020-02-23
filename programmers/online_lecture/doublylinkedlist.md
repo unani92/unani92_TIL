@@ -17,7 +17,7 @@ class Node :
         self.next = None
 
 class DoublyLinkedList : 
-    def __init__(self, item)
+    def __init__(self, item) :
         self.nodeCount = 0
         
         self.head = Node(None)
@@ -33,59 +33,62 @@ class DoublyLinkedList :
 주의사항 : tail이 더미노드이기 때문에 다음다음이 맞다. 
 ```python
 def traverse(self) : 
-        result = []
-        curr = self.head
+    result = []
+    curr = self.head
 
-        while curr.next.next : 
-            curr = curr.next
-            result.append(curr.data)
-        
-        return result
+    while curr.next.next : 
+        curr = curr.next
+        result.append(curr.data)
+    
+    return result
 
 def reverse(self) : 
-        result = []
-        curr = self.tail
+    result = []
+    curr = self.tail
 
-        while curr.prev.prev : 
-            curr = curr.prev
-            result.append(curr.data)
-        
-        return result
+    while curr.prev.prev : 
+        curr = curr.prev
+        result.append(curr.data)
+    
+    return result
 ```
 
 ### 원소의 삽입
 ```python
 def insertAfter(self, prev, newNode) :
-        next = prev.next
-        
-        newNode.prev = prev
-        newNode.next = next
-        prev.next = newNode
-        next.prev = newNode
-        self.nodeCount += 1
-        return True
+    next = prev.next
+    
+    newNode.prev = prev
+    newNode.next = next
+    prev.next = newNode
+    next.prev = newNode
+    self.nodeCount += 1
+    return True
 ```
 
 ### getAt 매서드의 코드 개선
-양방향 연결리스트의 특성 상 뒤에서부터 순회도 가능하기 때문에 조회하려는 위치를 nodeCount의 절반을 기준으로 나타낼 수 있다. 따라서 **절반보다 짧으면 앞에서부터, 길면 뒤에서 부터** 순회하면 원하는 결과값을 더 빠르게 찾을 수 있다. 
+양방향 연결리스트의 특성 상 뒤에서부터 순회도 가능하기 때문에 
+조회하려는 위치를 nodeCount의 절반을 기준으로 나타낼 수 있다. 
+따라서 **절반보다 짧으면 앞에서부터, 길면 뒤에서 부터** 순회하면
+원하는 결과값을 더 빠르게 찾을 수 있다. 
 
 ```python
 def getAt(self, pos) : 
-        if pos < 0 or pos > self.nodeCount : 
-            return None
-        
-        i = 0
-        if pos > self.nodeCount // 2 : 
-            curr = self.tail
-            while i < self.nodeCount - pos + 1 : 
-                curr = curr.prev
-                i += 1
+    if pos < 0 or pos > self.nodeCount : 
+        return None
+    
+    i = 0
+    if pos > self.nodeCount // 2 : 
+        curr = self.tail
+        while i < self.nodeCount - pos + 1 : 
+            curr = curr.prev
+            i += 1
 
-        else : 
-            curr = self.head
-            while i < pos : 
-                curr = curr.next 
-                i += 1
+    else : 
+        curr = self.head
+        while i < pos : 
+            curr = curr.next 
+            i += 1
 
-        return curr
+    return curr
 ```

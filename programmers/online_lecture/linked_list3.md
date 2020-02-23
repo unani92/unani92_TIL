@@ -42,26 +42,26 @@ def insertAt(self, pos, newNode) :
 ### 원소의 삭제
 ```python
 def popAfter(self, prev):
-        curr = prev.next
-        if prev.next == None : 
-            return None
-        
-        if curr == self.tail : 
-            self.tail = prev
-            prev.next = None
-        else : 
-            prev.next = curr.next
-        
-        self.nodeCount -= 1
+    curr = prev.next
+    if prev.next == None : 
+        return None
+    
+    if curr == self.tail : 
+        self.tail = prev
+        prev.next = None
+    else : 
+        prev.next = curr.next
+    
+    self.nodeCount -= 1
 
-        return curr.data
+    return curr.data
 
-    def popAt(self, pos):
-        if pos < 1 or pos > self.nodeCount : 
-            raise IndexError
-        else : 
-            prev = self.getAt(pos-1)
-            return self.popAfter(prev)
+def popAt(self, pos):
+    if pos < 1 or pos > self.nodeCount : 
+        raise IndexError
+    else : 
+        prev = self.getAt(pos-1)
+        return self.popAfter(prev)
 ```
 **고려사항들**
 전제조건 : 파핑하려는 노드는 curr로 표현하고 이는 prev의 다음 노드이다. 
