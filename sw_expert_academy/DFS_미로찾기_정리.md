@@ -68,6 +68,8 @@ for t in range(1, 1+T) :
 ```
 
 ### 수열 찾기 비공개문제(미로 유형과 유사)
+
+##### 반복문 ver
 ```python
 def findstart() :
     global M
@@ -117,3 +119,39 @@ for t in range(1, 1+T) :
     else :
         print(f'#{t} {0}')
 ```
+
+##### 재귀 ver
+```python
+def findstart() : 
+    global M
+    for i in range(M) : 
+        for j in range(M) : 
+            if board[i][j] : 
+                return i,j
+
+def solution(x,y) : 
+    visited[x][y] = True
+    if board[x][y] in goal : 
+        goal.remove(board[x][y])
+    for dx, dy in (1,0),(0,1),(-1,0),(0,-1) : 
+        test_x,test_y = x+dx,y+dy
+        if 0 <= test_x < M and 0 <= test_y < M :
+            if board[test_x][test_y] != 0 and not visited[test_x][test_y] : 
+                solution(test_x,test_y)
+
+T = int(input())
+for t in range(1, 1+T) :
+
+    goal = list(map(int, input().split()))
+    N = goal.pop(0)
+    M = int(input())
+    board = [list(map(int, input().split())) for _ in range(M)]
+    visited = [[False]*M for _ in range(M)]
+    
+    x,y = findstart()
+    solution(x,y)
+
+    if not len(goal) : 
+        print(f'#{t} {1}')
+    else : 
+        print(f'#{t} {0}')
