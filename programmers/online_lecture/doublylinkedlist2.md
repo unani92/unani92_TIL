@@ -48,3 +48,5 @@ def concat(self,L2):
     self.tail = L2.tail
     self.nodeCount += L2.nodeCount
 ```
+>더미 head와 tail이 있기 때문에 빈 연결리스트와 합치게 되는 경우를 생각할 필요가 없다. 
+>모든 노드에 대해 앞과 뒤에 최소 하나씩의 노드가 위치하기 때문이다.   
