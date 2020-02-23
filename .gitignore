@@ -130,3 +130,4 @@ dmypy.json
 
 # for me
 ignore/
+.txt
