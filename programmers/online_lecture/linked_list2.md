@@ -33,14 +33,15 @@ def insertAt(self, pos, newNode) :
             if pos == 1 : # 새 노드가 head인 경우
                 newNode.next = self.head
                 self.head = newNode
+
             elif pos == self.nodecnt + 1 : 
                 prev = self.tail
 
                 # prev는 원래 tail이였기 때문에 next는 None
                 # 따라서 새로 tail이 된 newNode의 next도 당연히 None
-                newNode.next = prev.next    
+                newNode.next = prev.next
                 prev.next = newNode
-
+            
             else : 
                 prev = self.getAt(pos-1) 
                 newNode.next = prev.next
