@@ -53,7 +53,8 @@ def dfs(L, s) :
 
 N = int(input())
 coin = list(map(int, input().split()))
-coin.sort(reverse=True)
+# 당연히 큰 단위부터 채우는게 동전 소요가 적기 때문에 계산속도가 빨라진다. 
+coin.sort(reverse=True)    
 goal = int(input())
 result = 10000
 
