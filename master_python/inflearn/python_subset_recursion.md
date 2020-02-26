@@ -50,14 +50,12 @@ def dfs(L,s,tsum) :
         dfs(L+1,s+dogs[L],tsum+dogs[L])    # 한다.
         dfs(L+1,s,tsum+dogs[L])            # 안한다.
 
-
 # 무게제한 c, 최대 마리수
 c, n = map(int, input().split())
-dogs = [0] * n
-result = -1
+dogs = [int(input()) for _ in range(n)]
 total = sum(dogs)
-for i in range(n) :
-    dogs[i] = int(input())
+
+result = 0
 dfs(0,0,0)
 print(result)
 ```
