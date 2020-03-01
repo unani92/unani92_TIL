@@ -82,7 +82,7 @@ def solution(prices) :
             else :
                 if j == len(prices)-1 :
                     answer.append(j-i)
-                    break~~~~
+                    break
 
     return answer + [0]
 ```
