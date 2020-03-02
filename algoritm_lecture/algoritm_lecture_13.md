@@ -45,9 +45,32 @@ p = [0]*len(A)
 u = [0]*len(A)
 f(0, len(A))  
 ```
+
+
 ### 분할정복
+
 > 거듭제곱 구할 시 C^n을 구할 시 C를 n번 곱하기보다 C^(n-1)에 C를 1번 더 곱해주는 발상이 분할정복이라 할 수 있다. 
 예) 퀵 정렬, 거듭제곱 등....
+
+#### 분할정복 예시 : 퀵소트
+
+1. 숫자 하나를 피벗으로 잡는다. 
+2. 피벗보다 크면 오른쪽배열 / 작으면 왼쪽배열로 보낸다. 
+3. 분할된 왼쪽과 오른쪽 배열에 대해 같은 작업을 수행한다. 
+4. 최종적으로 모든 것들을 합치면 정렬된 모습이 등장한다.
+
+```python
+def QuickSort(lst) : 
+    if len(lst) <= 1 : 
+        return lst
+    else : 
+        pivot = lst.pop()
+        left = [num for num in lst if num <= pivot]
+        right = [num for num in lst if num > pivot]
+        return QuickSort(left) + [pivot] + QuickSort(right) 
+```
+
+
 
 
 ### 그래프
@@ -115,3 +138,4 @@ def DFS(n) :
             if matrix[n][i] and not visited[i] : 
                 stack.append(i)
                 visited[i] = 1
+```

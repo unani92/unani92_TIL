@@ -131,3 +131,6 @@ dmypy.json
 # for me
 ignore/
 .txt
+.idea/
+.vs/
+.vscode/
