@@ -70,6 +70,17 @@ class BinaryTree:
         else : 
             return []
 
+    def bft(self):
+        traverse = []
+        if self.root:
+            queue = [self.root]
+            while queue:
+                A = queue.pop(0)
+                traverse.append(A.data)
+                if A.left: queue.append(A.left)
+                if A.right: queue.append(A.right)
+
+        return traverse
 
 N = Node('A')
 N.left = Node('B')
@@ -82,4 +93,4 @@ N.right.right = Node('G')
 N.right.left.right = Node('J')
 
 BT = BinaryTree(N)
-print(BT.preorder())
+print(BT.bft())
