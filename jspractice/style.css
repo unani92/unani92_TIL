@@ -1,0 +1,15 @@
+.clicked {
+    color: cadetblue;
+}
+.btn {
+    cursor: pointer;
+}
+.form, .greetings {
+    display: none;
+}
+.showing {
+    display: block;
+}
+button {
+    border: none;
+}
