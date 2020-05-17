@@ -1,0 +1,6 @@
+{% if request.user in article.like_users.all %}
+  <a href="{% url 'articles:like' article.pk %}"><i class="fas fa-heart">취소</i></a>
+{% else %}
+  <a href="{% url 'articles:like' article.pk %}"><i class="far fa-heart">좋아요</i></a>
+{% endif %}
+<p>{{ article.like_users.count }}</p>
