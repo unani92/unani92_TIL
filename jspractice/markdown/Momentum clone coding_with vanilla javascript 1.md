@@ -1,6 +1,6 @@
 # Momentum clone coding : with vanilla javascript 1
 
-<img src="finish.jpg"/>
+![image-20200520001143633](image-20200520001143633.png)
 
 ## 클론코딩 컨셉
 > 화면에 큰 시계와 함께 간단하게 toDo 리스트를 작성하고 수정 및 삭제할 수 있는 앱을 vanilla JS로 클론코딩해 보았다. 
@@ -56,3 +56,4 @@ const amFm = function(time) {
         return time
     }
 }
+```

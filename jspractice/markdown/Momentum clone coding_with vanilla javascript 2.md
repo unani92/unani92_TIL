@@ -1,6 +1,6 @@
 # Momentum clone coding_with vanilla javascript 2
 
-<img src="finish.jpg"/>
+![image-20200520001229052](image-20200520001229052.png)
 
 ## 기본 컨셉
     1. 할 일을 입력 후 enter를 친다. 
@@ -106,6 +106,7 @@ function editTodos(event) {
 ```
 1. 수정 폼의 내용이 제대로 반영되기 위해서는 다음 조건을 충족해야 한다. 
 > 엔터키를 눌렀을때 새로고침이 발생하지 않아야 한다. 
+  
     - 이를 위해 submit 타입(엔터키 클릭)으로 이벤트가 발생했을 경우 디폴트 이벤트를 막아주어야 한다. 
 2. 'click' / 'submit' 이벤트가 발생한 원점 `event.target`을 바탕으로 **부모 노드를 찾아내고(`parentNode`) 자식 노드의 `querySelect()`를 추출**한다. 
 3. 빈 input을 반영하는 일을 막기 위해 `editInput.value`를 확인한다. 
