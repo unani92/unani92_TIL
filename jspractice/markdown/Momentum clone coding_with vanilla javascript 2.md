@@ -107,7 +107,7 @@ function editTodos(event) {
 1. 수정 폼의 내용이 제대로 반영되기 위해서는 다음 조건을 충족해야 한다. 
 > 엔터키를 눌렀을때 새로고침이 발생하지 않아야 한다. 
     - 이를 위해 submit 타입(엔터키 클릭)으로 이벤트가 발생했을 경우 디폴트 이벤트를 막아주어야 한다. 
-2. 'click' / 'submit' 이벤트가 발생한 원점 `event.target`을 바탕으로 부모 노드를 찾아내고(`parentNode`) 자식 노드의 `querySelect()`를 추출한다. 
+2. 'click' / 'submit' 이벤트가 발생한 원점 `event.target`을 바탕으로 **부모 노드를 찾아내고(`parentNode`) 자식 노드의 `querySelect()`를 추출**한다. 
 3. 빈 input을 반영하는 일을 막기 위해 `editInput.value`를 확인한다. 
     - 내용이 있으면 앞에서 뽑아낸 수정 전의 `preValue`의 실제 텍스트를 `editInput.value`로 바꿔준다. 
 
@@ -134,7 +134,7 @@ function cancelLine(event) {
     }
 }
 ```
-1. 수정 로직과 마찬가지로 이벤트가 발생하는 원점을 찾고 이를 바탕으로 부모노드를 찾아 변수에 할당한다. 
+1. 수정 로직과 마찬가지로 **이벤트가 발생하는 원점을 찾고 이를 바탕으로 부모노드를 찾아** 변수에 할당한다. 
 2. 이벤트 원점에 해당하는 span태그의 클래스가 `cancel`이면(Completed ul의 자식이라면) `cancel`클래스를 삭제하고 toDoList의 자식으로 합쳐준다. 반대의 경우는 반대로 적용한다. 
 ```css
 .cancel {
@@ -153,3 +153,20 @@ function paintTodo(text) {
 ```
 
 ```javascript
+function deleteTodos(event) {
+    const btn = event.target;
+    const li = btn.parentNode;
+    const span = li.querySelector("span")
+    if (span.classList.contains("cancel")) {
+        completeList.removeChild(li);
+    } else {
+        toDoList.removeChild(li);
+    }
+}
+```
+삭제는 삭제버튼을 클릭 시에 작동하는 이벤트이다. 따라서 마찬가지로 **이벤트 원점과 부모노드**를 찾아준다. 삭제는 toDo에 있건 Completed에 있건 상관없이 이뤄저야 하기 때문에 다음과 같이 조건을 분기한다. 
+1. span이 cancel 클래스를 가진 경우(completeList의 자식인 경우)
+    - completeList에 있는 li 자식노드를 전부 삭제
+2. 반대의 경우는 반대로 적용한다. 
+
+사실 localstorage 안에 toDo를 저장하면 새로고침을 하더라도 사용자가 직접 삭제하기 전까지는 계속해서 뷰에 남아있는데 거기까지 구현은 못했다. 이는 향후 구현하기로 한다. 
