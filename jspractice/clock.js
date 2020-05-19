@@ -15,7 +15,7 @@ const getTime = function() {
     const minutes = date.getMinutes();
     const hours = date.getHours();
     const seconds = date.getSeconds()
-    clockTitle.innerText = `${amFm(hours)} :  ${amFm(hours)} : ${amFm(seconds)}`
+    clockTitle.innerText = `${amFm(hours)} :  ${amFm(minutes)} : ${amFm(seconds)}`
 }
 
 function init(){
