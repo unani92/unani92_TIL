@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{getBankruppedPeople}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            accounts: [
+                {name:"unani", balance:500, isBankrupped:true},
+                {name:"jung", balance:100, isBankrupped:false},
+                {name:"kim", balance:240, isBankrupped:false},
+                {name:"tom", balance:1000, isBankrupped:true},
+            ],
+
+        },
+        methods: {
+            // getBankruppedPeople: function() {
+            //     const newArr = this.accounts.filter((account) => {
+            //         return account.isBankrupped
+            //     })
+            //     return newArr
+            // }
+        },
+        // 함수를 만드는데, Data를 CRD 하지 않고, "오직 조회만" 하고 싶을 때
+        computed: {
+            //함수지만 이름은 명사형으로 짓는다.  
+            getBankruppedPeople: function() {
+                const newArr = this.accounts.filter((account) => {
+                    return account.isBankrupped
+                })
+                return newArr
+            }
+        },
+    })
+  </script>
+</body>
+</html>

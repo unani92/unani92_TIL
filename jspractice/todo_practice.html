@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <title>Todo 복습하기</title>
+  <style>
+    .is_completed {
+      text-decoration: line-through;
+    }
+    button {
+      border-radius: 5px;
+      border: gray;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1 class="my-4 text-center">ToDo</h1>
+    <div class="container">
+      <div class="form-group">
+        <select v-model="status" class="form-control">
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+      <div class="form-group d-flex">
+        <input v-model="newInput" @keydown.enter="addTodo" type="text" class="form-control"placeholder="할 일을 적어주세요">
+        <button @click="addTodo" class="btn btn-light">+</button>
+        <button @click="removeCompleted" style="width: 70px" class="btn btn-light">완료</button>
+      </div>
+      <ul>
+        <li v-for="todo in filterTodo()" :class="{is_completed:todo.completed}">
+          <input v-model="todo.completed" type="checkbox">
+          {{todo.content}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            status: "all",
+            newInput: "",
+            todos: [
+                {content: 'eat kimchi', completed:false}
+            ]
+        },
+        methods: {
+            addTodo() {
+                this.todos.push(
+                    {content: this.newInput, completed: false}
+                )
+                this.newInput = ''
+            },
+            filterTodo() {
+                if (this.status === "active") {
+                    return this.todos.filter(todo => !todo.completed)
+                } else if (this.status === "completed") {
+                    return this.todos.filter(todo => todo.completed)
+                }
+                return this.todos
+            },
+            removeCompleted() {
+                this.todos = this.todos.filter(todo => {
+                // completed가 false인것을 필터링한 것을 todos에 담아라
+                    return !todo.completed
+                })
+            }
+
+        }
+    })
+  </script>
+</body>
+</html>
