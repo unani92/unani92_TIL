@@ -79,7 +79,16 @@
 
 ### `filterTodo()`
 
+1. v-for은 함수의 return 값을 인자로 받을 수도 있다.todo를 All, Active, Completed로 나누어 해당하는 todo를 보여주기 위해 `fitlerTodo`를 정의하였다. 
+2. `is_completed` 클래스를 가지면 취소선이 그어지도록 하기 위해 todo의 completed가 `true`이면 클래스가 표시되도록 `v-bind`를 걸어주었다. 
+3. `<input type="checkbox">`와 모델 바인딩을 통해 체크박스의 true/false여부가 todo의 completed와 연결되게 함으로써 진행중인 일과 완료된 일을 구분하는 것을 구현하였다. 
+
 ```html
+<select v-model="status" class="form-control">
+  <option value="all">All</option>
+  <option value="active">Active</option>
+  <option value="completed">Completed</option>
+</select>
 <ul>
   <li v-for="todo in filterTodo()" :class="{is_completed:todo.completed}">
     <input v-model="todo.completed" type="checkbox">
@@ -88,3 +97,46 @@
 </ul>  
 ```
 
+#### filter 함수 사용하기
+여러 데이터 뭉치들로부터 조건에 만족하는 데이터만을 모아 todos를 재구성해 보여줄 것이기 때문에 `filter` 함수를 사용한다. 
+함수 안에 인자는 콜백 함수가 들어간다. 따라서 콜백 함수의 조건에 맞는 todo만이 todos에서 필터링 되어 재구성된다. 
+```javascript
+data: {
+    status: "all",
+    newInput: "",
+    todos: [
+        // 예시를 위한 더미데이터
+        {content: 'eat kimchi', completed:false}
+    ]
+},
+methods: {
+  filterTodo() {
+      if (this.status === "active") {
+          return this.todos.filter(todo => !todo.completed)
+      } else if (this.status === "completed") {
+          return this.todos.filter(todo => todo.completed)
+      }
+      return this.todos
+  }
+}
+```
+
+### `removeComplete()`
+
+완료된 일(`todo.completed === true`)은 아예 data의 **todos 배열에서 삭제** 해버리는 기능을 구현하고자 한다. 
+completed가 false인것(`todo.completed === false`)을 필터링해 todos에 담는 매서드를 구현해 클릭하고자 하는 버튼에 이벤트를 걸어주면 된다.
+
+```html
+<button @click="removeCompleted" style="width: 70px" class="btn btn-light">완료</button>
+```
+
+```javascript
+methods: {
+  removeCompleted() {
+      this.todos = this.todos.filter(todo => {
+      // 
+          return !todo.completed
+      })
+  }
+}
+```
